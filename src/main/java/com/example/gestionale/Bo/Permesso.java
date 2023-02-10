@@ -20,10 +20,7 @@ public class Permesso {
 	@Column(length=30,nullable=false,unique=true)
 	private String ruolo;
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="ruolo")
-	private List<Account> listAccount;/*se non ho capito male il mappedBy prende una variabile da un altra classe ; mi spiego
-	meglio , in pratica il nome che deve andare nel mappedBy è il nome di un attributo che ha come tipo lo stesso della classe
-	in cui vi è il mappedBy per far si di collegare un oggetto di tipo ruolo con un oggetto di tipo account , in questo caso 
-	un solo ruolo fa parte di molti account OneToMany riga 22*/
+	private List<Account> listAccount;
 
 	public int getId() {
 		return id;

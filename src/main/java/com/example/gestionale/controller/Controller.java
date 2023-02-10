@@ -71,7 +71,7 @@ public class Controller {
 
 	//////////////////////////// Utente\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	@RequestMapping(value = "/insertUtente", method = RequestMethod.POST)
-	public void register(Utente u, Account a, int idPermesso) throws InterruptedException {//isert and update
+	public void register(Utente u, Account a, int idPermesso) throws InterruptedException {//insert and update
 		System.out.println("method of register");
 		System.out.println("utente : " + u.toString() + a.toString());
 		Permesso p = rp.findById(idPermesso);
