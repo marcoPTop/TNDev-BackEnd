@@ -46,6 +46,7 @@ public class Avvio {// prova
 				System.out.println("ruolo found");
 				p = permessi.get(i);
 				break;
+				
 			}
 			if (i == permessi.size() - 1) {
 				System.err.println("ruolo not found, sorry id not exsist");
