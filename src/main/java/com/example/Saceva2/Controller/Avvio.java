@@ -3,9 +3,6 @@ package com.example.Saceva2.Controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.servlet.http.HttpSession;
-
-import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +18,8 @@ import com.example.Saceva2.Bo.Utente;
 import com.example.Saceva2.Repository.InterfaceAccountJpa;
 import com.example.Saceva2.Repository.InterfacePermessoJps;
 import com.example.Saceva2.Repository.InterfaceUtenteJpa;
+
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping(value = "/ContorllerSaceva2")
