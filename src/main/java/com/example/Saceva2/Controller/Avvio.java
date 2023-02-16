@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,31 +35,45 @@ public class Avvio {// prova
 	@Autowired
 	IRepoPermesso ip;
 
-	////////////////////////////Login\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+	//////////////////////////// Login\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	@PostMapping(value = "login")
 	public String login(Account a) {
+
+		System.out.println("pass lenght" + a.getPass().length());
 		String esito = "";
-		System.out.println("From html username : " + a.getuName() + ", Email : "+ a.getEmail() + "pass : " + a.getPass());
+		System.out.println(
+				"From html username : " + a.getuName() + ", Email : " + a.getEmail() + "pass : " + a.getPass());
+		BCryptPasswordEncoder cryptoPs = new BCryptPasswordEncoder();
+
 		List<Account> accounts = ia.findAll();
-		if(null == a.getEmail())
+		if (null == a.getEmail())
 			System.out.println();
-		if("".equals(a.getuName()) || null == a.getuName())
+		if ("".equals(a.getuName()) || null == a.getuName())
 			a.setuName("");
-		if("".equals(a.getEmail()) || null == a.getEmail())
+		if ("".equals(a.getEmail()) || null == a.getEmail())
 			a.setEmail("");
-		if(("".equals(a.getuName()) || null == a.getuName()) && ("".equals(a.getEmail()) || null == a.getEmail()))
+		if (("".equals(a.getuName()) || null == a.getuName()) && ("".equals(a.getEmail()) || null == a.getEmail()))
 			esito = "missing UserName and Password , try again";
 		else {
-			for(int i = 0; i < accounts.size() ; i++) {
-				if((a.getuName().equals(accounts.get(i).getuName()) || a.getEmail().equals(accounts.get(i).getEmail())) 
-						&& a.getPass().equals(accounts.get(i).getPass())) {
+			for (int i = 0; i < accounts.size(); i++) {
+				if (cryptoPs.matches(a.getPass(), accounts.get(i).getPass())) {
+					System.out.println(" pass : " + accounts.get(i).getPass());
 					System.out.println("account found on db");
-					System.out.println("From html username : " + a.getuName() + ", Email : "+ a.getEmail() + "pass : " + a.getPass());
+					System.out.println("From html username : " + a.getuName() + ", Email : " + a.getEmail() + "pass : "
+							+ a.getPass());
 					System.out.println("Found on db username : " + accounts.get(i).getuName());
 					esito = "Accesso eseguito";
 					break;
 				}
-				if( i == accounts.size() - 1) {
+//				if((a.getuName().equals(accounts.get(i).getuName()) || a.getEmail().equals(accounts.get(i).getEmail())) 
+//						&& a.getPass().equals(accounts.get(i).getPass())) {
+//					System.out.println("account found on db");
+//					System.out.println("From html username : " + a.getuName() + ", Email : "+ a.getEmail() + "pass : " + a.getPass());
+//					System.out.println("Found on db username : " + accounts.get(i).getuName());
+//					esito = "Accesso eseguito";
+//					break;
+//				}
+				if (i == accounts.size() - 1) {
 					System.err.println("corrispondenza non trovata");
 					esito = "Accesso negato";
 				}
@@ -67,65 +82,70 @@ public class Avvio {// prova
 		return esito;
 	}
 
-	////////////////////////////Utente\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+	//////////////////////////// Utente\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	@RequestMapping(value = "/insertUtente", method = RequestMethod.POST)
 	public List<Utente> register(Utente u, Account a, int idPermesso) throws InterruptedException {// insert and update
 		System.out.println("method of register");
-//		System.out.println("utente : " + u.toString());
-		Permesso p = null;
-		List<Permesso> permessi = ip.findAll();
-		for (int i = 0; i < permessi.size(); i++) {
-			System.out.println("serach ruolo");
-			if (permessi.get(i).getId() == idPermesso) {
-				System.out.println("ruolo found");
-				p = permessi.get(i);
-				break;
-			}
-			if (i == permessi.size() - 1) {
-				System.err.println("ruolo not found, sorry id not exsist");
-			}
-		}
-		System.out.println("permesso p : " + p.toString());
+		String passCrypt = "";
+		Permesso p = ip.findById(idPermesso);// work
+		BCryptPasswordEncoder cryptoPs = new BCryptPasswordEncoder();
+		passCrypt = cryptoPs.encode(a.getPass());
+		a.setPass(passCrypt);
+//		List<Permesso> permessi = ip.findAll();
+//		for (int i = 0; i < permessi.size(); i++) {
+//			System.out.println("serach ruolo");
+//			if (permessi.get(i).getId() == idPermesso) {
+//				System.out.println("ruolo found");
+//				p = permessi.get(i);
+//				break;
+//			}
+//			if (i == permessi.size() - 1) {
+//				System.err.println("ruolo not found, sorry id not exsist");
+//			}
+//		}
 		a.setRuolo(p);
 		u.setAccount(a);
-		System.out.println("utente : " + u.toString());
 		iu.save(u);
-//		Thread.sleep(375);
-//		return ru.findAll(); java.lang.IllegalStateException: Cannot call sendError() after the response has been committed
+
 		return iu.findAll();
 
 	}
 
 	@RequestMapping(value = "/deleteUtente", method = RequestMethod.DELETE)
-	public String delete(@RequestParam(defaultValue = "0") int idUtente, int[] listToDelete) {// work delete account and utente
+	public String delete(@RequestParam(defaultValue = "0") int idUtente, int[] listToDelete) {// work delete account and
+																								// utente
 		System.out.println("method of delete");
 		String msg = "";
 		ArrayList<Utente> allUtenti = (ArrayList<Utente>) iu.findAll();
-		HashMap<Integer,Utente> utentiCheckToDelete = new HashMap<Integer,Utente>();
-		if(idUtente == 0 && (listToDelete.length == 0 || listToDelete == null)) {
-			msg = "sorry but idUtente or listToDelete are missing";
-		}else {
-			//check if listToDelete id exist on db
-			for(int i = 0; i < listToDelete.length; i++) {
-				Utente u = iu.findById(listToDelete[i]);
-				if(u != null) 
-					utentiCheckToDelete.put(u.getIdUtente(), u);
-			}
-			System.out.println("idUtente : " + idUtente);
-			System.out.println("List idUtenti verificati da eliminare : " + utentiCheckToDelete.toString());
-			if(utentiCheckToDelete.size() != 0 && idUtente == 0) {
-				for(int toDelete:utentiCheckToDelete.keySet()) {
-					msg = "Delte utente with id : " + toDelete;
-					iu.deleteById(toDelete);
+		HashMap<Integer, Utente> utentiCheckToDelete = new HashMap<Integer, Utente>();
+		try {
+			if (idUtente == 0 && (listToDelete.length == 0 || listToDelete == null)) {
+				msg = "sorry but idUtente or listToDelete are missing";
+			} else {
+				// check if listToDelete id exist on db
+				for (int i = 0; i < listToDelete.length; i++) {
+					Utente u = iu.findById(listToDelete[i]);
+					if (u != null)
+						utentiCheckToDelete.put(u.getIdUtente(), u);
 				}
-			}else if(idUtente != 0) {
-				if(iu.findById(idUtente) != null) {
-					msg = "Delete one Utente with id : " + idUtente;
-					iu.deleteById(idUtente);
+				System.out.println("idUtente : " + idUtente);
+				System.out.println("List idUtenti verificati da eliminare : " + utentiCheckToDelete.toString());
+				if (utentiCheckToDelete.size() != 0 && idUtente == 0) {
+					for (int toDelete : utentiCheckToDelete.keySet()) {
+						msg = "Delte utente with id : " + toDelete;
+						iu.deleteById(toDelete);
+					}
+				} else if (idUtente != 0) {
+					if (iu.findById(idUtente) != null) {
+						msg = "Delete one Utente with id : " + idUtente;
+						iu.deleteById(idUtente);
+					}
 				}
 			}
+		} catch (NullPointerException e) {
+			System.err.println("Lista vuota");
 		}
-		
+
 		return msg;
 	}
 
@@ -151,7 +171,7 @@ public class Avvio {// prova
 		return "tabellaUtente";
 	}
 
-	//////////////////////permesso\\\\\\\\\\\\\\\\\\\\ da provare solo la ricerca
+	////////////////////// permesso\\\\\\\\\\\\\\\\\\\\ da provare solo la ricerca
 	@PostMapping(value = "insertRuolo")
 	public List<Permesso> insertRuolo(Permesso p) {
 		System.out.println("permesso : " + p.toString());
