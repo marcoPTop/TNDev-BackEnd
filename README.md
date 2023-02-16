@@ -5,7 +5,9 @@ This application is based on the REST API, calls to the different methods expose
 to complete the crud of a company management system, then insertion of  <br>
 accounts / users / roles, with the account link <-> user so that if a user is deleted his <br>corresponding account is also deleted <br>
 
-*?The login phase is under development?* 
+**~~?The login phase is under development?~~**
+
+***Update 16-02-23 Login and encrypting passowrd work*** :smile:
 
 **what you need** : 
 
