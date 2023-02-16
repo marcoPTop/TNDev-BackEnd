@@ -1,8 +1,6 @@
 package com.example.Saceva2.Repository;
 
-import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.example.Saceva2.Bo.Account;
 

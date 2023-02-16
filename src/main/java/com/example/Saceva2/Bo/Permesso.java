@@ -25,7 +25,7 @@ public class Permesso {
 	private int id;
 	@Column(length = 30, nullable = false, unique = true)
 	private String ruolo;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ruolo")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "ruolo")
 	@JsonIgnore
 	private List<Account> listAccount;
 
