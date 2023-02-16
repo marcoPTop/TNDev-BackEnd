@@ -1,9 +1,9 @@
 
 # Application based on Spring Boot 3
 
-This application is based on the REST API, calls to the different methods exposed, 
-to complete the crud of a company management system, then insertion of  
-accounts / users / roles, with the account link <-> user so that if a user is deleted his corresponding account is also deleted 
+<center>This application is based on the REST API, calls to the different methods exposed, <br>
+to complete the crud of a company management system, then insertion of  <br>
+accounts / users / roles, with the account link <-> user so that if a user is deleted his <br>corresponding account is also deleted <br></center>
 
 *?The login phase is under development?* 
 
