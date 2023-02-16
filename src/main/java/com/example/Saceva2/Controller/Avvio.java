@@ -96,7 +96,6 @@ public class Avvio {// prova
 	}
 
 	////////////////////// permesso\\\\\\\\\\\\\\\\\\\\ da provare solo la ricerca
-	////////////////////// specifica del ruolo
 	@PostMapping(value = "insertRuolo")
 	public List<Permesso> insertRuolo(Permesso p) {
 		System.out.println("permesso : " + p.toString());
