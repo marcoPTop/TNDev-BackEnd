@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.Saceva2.Bo.Account;
 import com.example.Saceva2.Bo.Permesso;
 import com.example.Saceva2.Bo.Utente;
-import com.example.Saceva2.Repository.InterfaceAccountJpa;
-import com.example.Saceva2.Repository.InterfacePermessoJps;
-import com.example.Saceva2.Repository.InterfaceUtenteJpa;
+import com.example.Saceva2.Repository.IRepoAccount;
+import com.example.Saceva2.Repository.IRepoPermesso;
+import com.example.Saceva2.Repository.IRepoUtente;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -26,11 +26,11 @@ import jakarta.servlet.http.HttpSession;
 public class Avvio {// prova
 
 	@Autowired
-	InterfaceUtenteJpa iu;
+	IRepoUtente iu;
 	@Autowired
-	InterfaceAccountJpa ia;
+	IRepoAccount ia;
 	@Autowired
-	InterfacePermessoJps ip;
+	IRepoPermesso ip;
 
 	//////////////////////////// Utente\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	@RequestMapping(value = "/insertUtente", method = RequestMethod.POST)

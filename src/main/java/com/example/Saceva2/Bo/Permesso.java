@@ -20,7 +20,7 @@ public class Permesso {
 
 	@Id
 	@SequenceGenerator(name = "SEQ_IDRuolo", sequenceName = "SEQ_IDRuolo", allocationSize = 1, initialValue = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_IDRuolo")//dopo ogni stop dell'applicativo la porssima insert aumenta di 50 da rivedere risolto con generator
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_IDRuolo")
 	@Column(name = "Id")
 	private int id;
 	@Column(length = 30, nullable = false, unique = true)
