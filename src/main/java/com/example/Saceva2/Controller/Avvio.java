@@ -25,7 +25,7 @@ import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping(value = "/ContorllerSaceva2")
-public class Avvio {// test 23 02 2023
+public class Avvio {// test
 
 	@Autowired
 	IRepoUtente iu;
@@ -34,10 +34,10 @@ public class Avvio {// test 23 02 2023
 	@Autowired
 	IRepoPermesso ip;
 
-	//////////////////////////// Login\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+	////////////////////////////Login\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	@PostMapping(value = "login")
-	public String login(Account a) {
-
+	public boolean login(Account a) {
+		boolean access = false;
 		System.out.println("pass lenght" + a.getPass().length());
 		String esito = "";
 		System.out.println(
@@ -62,6 +62,7 @@ public class Avvio {// test 23 02 2023
 							+ a.getPass());
 					System.out.println("Found on db username : " + accounts.get(i).getuName());
 					esito = "Accesso eseguito";
+					access = true;
 					break;
 				}
 //				if((a.getuName().equals(accounts.get(i).getuName()) || a.getEmail().equals(accounts.get(i).getEmail())) 
@@ -75,13 +76,15 @@ public class Avvio {// test 23 02 2023
 				if (i == accounts.size() - 1) {
 					System.err.println("corrispondenza non trovata");
 					esito = "Accesso negato";
+					access = false;
 				}
 			}
 		}
-		return esito;
+		System.out.println(esito);
+		return access;
 	}
 
-	//////////////////////////// Utente\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+	////////////////////////////Utente\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	@RequestMapping(value = "/insertUtente", method = RequestMethod.POST)
 	public List<Utente> register(Utente u, Account a, int idPermesso) throws InterruptedException {// insert and update
 		System.out.println("method of register");
@@ -111,8 +114,7 @@ public class Avvio {// test 23 02 2023
 	}
 
 	@RequestMapping(value = "/deleteUtente", method = RequestMethod.DELETE)
-	public String delete(@RequestParam(defaultValue = "0") int idUtente, int[] listToDelete) {// work delete account and
-																								// utente
+	public String delete(@RequestParam(defaultValue = "0") int idUtente, int[] listToDelete) {// work delete account and utente																					
 		System.out.println("method of delete");
 		String msg = "";
 		ArrayList<Utente> allUtenti = (ArrayList<Utente>) iu.findAll();
@@ -170,7 +172,7 @@ public class Avvio {// test 23 02 2023
 		return "tabellaUtente";
 	}
 
-	////////////////////// permesso\\\\\\\\\\\\\\\\\\\\ da provare solo la ricerca
+	//////////////////////permesso\\\\\\\\\\\\\\\\\\\\ da provare solo la ricerca
 	@PostMapping(value = "insertRuolo")
 	public List<Permesso> insertRuolo(Permesso p) {
 		System.out.println("permesso : " + p.toString());
@@ -195,8 +197,8 @@ public class Avvio {// test 23 02 2023
 		if (all) {
 			return ip.findAll();// work
 		} else {
-			Permesso p = new Permesso();
-			p.setRuolo(ruolo);
+			Permesso p = new Permesso(ruolo);
+//			p.setRuolo(ruolo);
 			List<Permesso> listOneRuolo = new ArrayList<Permesso>();
 			listOneRuolo.add(p);
 			return listOneRuolo; // work

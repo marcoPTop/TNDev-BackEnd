@@ -28,6 +28,10 @@ public class Permesso {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "ruolo")
 	@JsonIgnore
 	private List<Account> listAccount;
+	
+	public Permesso(String ruolo) {
+		this.ruolo = ruolo;
+	}
 
 	public int getId() {
 		return id;

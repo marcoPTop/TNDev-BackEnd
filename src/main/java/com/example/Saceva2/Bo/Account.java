@@ -35,6 +35,14 @@ public class Account {
 	@OneToOne(fetch = FetchType.EAGER, mappedBy = "account")
 	@JsonIgnore
 	private Utente utente;
+	
+	public Account(String uName, String email, String pass, Permesso ruolo, Utente utente) {
+		this.uName = uName;
+		this.email = email;
+		this.pass = pass;
+		this.ruolo = ruolo;
+		this.utente = utente;
+	}
 
 	public int getIdAccount() {
 		return idAccount;
@@ -87,7 +95,7 @@ public class Account {
 	@Override
 	public String toString() {
 		return "Account [idAccount=" + idAccount + ", uName=" + uName + ", email=" + email + ", pass=" + pass
-				+ ", ruolo=" + ruolo + ", utente=" + utente + "]";
+				+ ", ruolo=" + ruolo + "]";
 	}
 
 }

@@ -32,6 +32,14 @@ public class Utente {
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "idAccount", referencedColumnName = "Id")
 	private Account account;
+	
+	public Utente(String nome, String cognome, String cf, int eta, Account account) {
+		this.nome = nome;
+		this.cognome = cognome;
+		this.cf = cf;
+		this.eta = eta;
+		this.account = account;
+	}
 
 	public int getIdUtente() {
 		return idUtente;
