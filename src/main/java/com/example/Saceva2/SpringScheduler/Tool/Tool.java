@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 import com.example.Saceva2.Bo.Account;
 import com.example.Saceva2.Bo.Permesso;
-import com.example.Saceva2.Bo.Utente;
+import com.example.Saceva2.Bo.User;
 import com.example.Saceva2.SpringScheduler.Dto.Dipendente;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
@@ -114,10 +114,10 @@ public class Tool {
 
 	public void dipendenteToBoEntity(Dipendente dip) {
 
-		Utente u = null;
+		User u = null;
 		Permesso p = new Permesso(dip.getRuolo());
 		Account a = new Account(dip.getUserName(), dip.getEmail(), dip.getPass(), p, u);
-		u = new Utente(dip.getName(), dip.getSurname(), dip.getCf(), dip.getEta(), a);
+		u = new User(dip.getName(), dip.getSurname(), dip.getCf(), dip.getEta(), a);
 		System.out.println("dipendenteToBoEntity : " + u.toString());
 	}
 

@@ -23,9 +23,9 @@ public class Dipendente {
 	@XmlElement(name = "SURNAME")
 	private String surname;
 	@XmlElement(name = "TAX_CODE")
-	private String cf;
+	private String taxCode;
 	@XmlElement(name = "YEARS")
-	private int eta;
+	private int years;
 	@XmlElement(name = "RULE")
 	private String ruolo;
 	
@@ -60,16 +60,16 @@ public class Dipendente {
 		this.surname = surname;
 	}
 	public String getCf() {
-		return cf;
+		return taxCode;
 	}
 	public void setCf(String cf) {
-		this.cf = cf;
+		this.taxCode = cf;
 	}
 	public int getEta() {
-		return eta;
+		return years;
 	}
 	public void setEta(int eta) {
-		this.eta = eta;
+		this.years = eta;
 	}
 	public String getRuolo() {
 		return ruolo;
@@ -77,10 +77,11 @@ public class Dipendente {
 	public void setRuolo(String ruolo) {
 		this.ruolo = ruolo;
 	}
+	
 	@Override
 	public String toString() {
 		return "Dipendente [email=" + email + ", userName=" + userName + ", pass=" + pass + ", name=" + name
-				+ ", surname=" + surname + ", cf=" + cf + ", eta=" + eta + ", ruolo=" + ruolo + "]";
+				+ ", surname=" + surname + ", cf=" + taxCode + ", eta=" + years + ", ruolo=" + ruolo + "]";
 	}
 	
 }

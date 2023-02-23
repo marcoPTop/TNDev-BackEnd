@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Saceva2.Bo.Account;
 import com.example.Saceva2.Bo.Permesso;
-import com.example.Saceva2.Bo.Utente;
+import com.example.Saceva2.Bo.User;
 import com.example.Saceva2.Repository.IRepoAccount;
 import com.example.Saceva2.Repository.IRepoPermesso;
 import com.example.Saceva2.Repository.IRepoUtente;
@@ -86,9 +86,10 @@ public class Avvio {// test
 
 	////////////////////////////Utente\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	@RequestMapping(value = "/insertUtente", method = RequestMethod.POST)
-	public List<Utente> register(Utente u, Account a, int idPermesso) throws InterruptedException {// insert and update
+	public List<User> register(User u, Account a, int idPermesso) throws InterruptedException {// insert and update
 		System.out.println("method of register");
 		String passCrypt = "";
+		
 		Permesso p = ip.findById(idPermesso);// work
 		BCryptPasswordEncoder cryptoPs = new BCryptPasswordEncoder();
 		passCrypt = cryptoPs.encode(a.getPass());
@@ -107,6 +108,7 @@ public class Avvio {// test
 //		}
 		a.setRuolo(p);
 		u.setAccount(a);
+		System.out.println(" tutto : "+ u + idPermesso);
 		iu.save(u);
 
 		return iu.findAll();
@@ -117,15 +119,15 @@ public class Avvio {// test
 	public String delete(@RequestParam(defaultValue = "0") int idUtente, int[] listToDelete) {// work delete account and utente																					
 		System.out.println("method of delete");
 		String msg = "";
-		ArrayList<Utente> allUtenti = (ArrayList<Utente>) iu.findAll();
-		HashMap<Integer, Utente> utentiCheckToDelete = new HashMap<Integer, Utente>();
+		ArrayList<User> allUtenti = (ArrayList<User>) iu.findAll();
+		HashMap<Integer, User> utentiCheckToDelete = new HashMap<Integer, User>();
 		try {
 			if (idUtente == 0 && (listToDelete.length == 0 || listToDelete == null)) {
 				msg = "sorry but idUtente or listToDelete are missing";
 			} else {
 				// check if listToDelete id exist on db
 				for (int i = 0; i < listToDelete.length; i++) {
-					Utente u = iu.findById(listToDelete[i]);
+					User u = iu.findById(listToDelete[i]);
 					if (u != null)
 						utentiCheckToDelete.put(u.getIdUtente(), u);
 				}
@@ -157,7 +159,7 @@ public class Avvio {// test
 //	}
 
 	@RequestMapping(value = "tabellaUteni", method = RequestMethod.GET)
-	public List<Utente> tabellaUtenti() {
+	public List<User> tabellaUtenti() {
 		return iu.findAll();
 	}
 

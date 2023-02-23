@@ -27,16 +27,18 @@ public class Account {
 	private String uName;
 	@Column(length = 30, nullable = false, unique = true)
 	private String email;
-	@Column(name = "Password", nullable = false, length = 30)
+	@Column(name = "Password", nullable = false, length = 120)
 	private String pass;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idRuolo", referencedColumnName = "id")
 	private Permesso ruolo;
 	@OneToOne(fetch = FetchType.EAGER, mappedBy = "account")
 	@JsonIgnore
-	private Utente utente;
+	private User utente;
 	
-	public Account(String uName, String email, String pass, Permesso ruolo, Utente utente) {
+	public Account() {}
+	
+	public Account(String uName, String email, String pass, Permesso ruolo, User utente) {
 		this.uName = uName;
 		this.email = email;
 		this.pass = pass;
@@ -84,11 +86,11 @@ public class Account {
 		this.ruolo = ruolo;
 	}
 
-	public Utente getUtente() {
+	public User getUtente() {
 		return utente;
 	}
 
-	public void setUtente(Utente utente) {
+	public void setUtente(User utente) {
 		this.utente = utente;
 	}
 

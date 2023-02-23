@@ -13,72 +13,74 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Utenti")
-public class Utente {
+@Table(name = "User")
+public class User {
 
 	@Id
 	@SequenceGenerator(name = "SEQ_IDUtente", sequenceName = "SEQ_IDUtente", initialValue = 1, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_IDUtente")
 	@Column(name = "Id", unique = true, updatable = false)
-	private int idUtente;
+	private int idUser;
 	@Column(length = 30, nullable = false)
-	private String nome;
+	private String name;
 	@Column(length = 30, nullable = false)
-	private String cognome;
+	private String surname;
 	@Column(length = 16, nullable = false)
-	private String cf;
+	private String taxCode;
 	@Column(length = 2, nullable = false)
-	private int eta;
+	private int years;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "idAccount", referencedColumnName = "Id")
 	private Account account;
 	
-	public Utente(String nome, String cognome, String cf, int eta, Account account) {
-		this.nome = nome;
-		this.cognome = cognome;
-		this.cf = cf;
-		this.eta = eta;
+	public User() {}
+	
+	public User(String nome, String cognome, String cf, int eta, Account account) {
+		this.name = nome;
+		this.surname = cognome;
+		this.taxCode = cf;
+		this.years = eta;
 		this.account = account;
 	}
 
 	public int getIdUtente() {
-		return idUtente;
+		return idUser;
 	}
 
 	public void setIdUtente(int idUtente) {
-		this.idUtente = idUtente;
+		this.idUser = idUtente;
 	}
 
 	public String getNome() {
-		return nome;
+		return name;
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.name = nome;
 	}
 
 	public String getCognome() {
-		return cognome;
+		return surname;
 	}
 
 	public void setCognome(String cognome) {
-		this.cognome = cognome;
+		this.surname = cognome;
 	}
 
 	public String getCf() {
-		return cf;
+		return taxCode;
 	}
 
 	public void setCf(String cf) {
-		this.cf = cf;
+		this.taxCode = cf;
 	}
 
 	public int getEta() {
-		return eta;
+		return years;
 	}
 
 	public void setEta(int eta) {
-		this.eta = eta;
+		this.years = eta;
 	}
 
 	public Account getAccount() {
@@ -91,7 +93,7 @@ public class Utente {
 
 	@Override
 	public String toString() {
-		return "Utente [idUtente=" + idUtente + ", nome=" + nome + ", cognome=" + cognome + ", cf=" + cf + ", eta="
-				+ eta + ", account=" + account + "]";
+		return "Utente [idUtente=" + idUser + ", nome=" + name + ", cognome=" + surname + ", cf=" + taxCode + ", eta="
+				+ years + ", account=" + account + "]";
 	}
 }

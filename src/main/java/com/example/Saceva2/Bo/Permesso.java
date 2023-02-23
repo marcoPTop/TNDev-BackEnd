@@ -29,6 +29,8 @@ public class Permesso {
 	@JsonIgnore
 	private List<Account> listAccount;
 	
+	public Permesso() {}
+	
 	public Permesso(String ruolo) {
 		this.ruolo = ruolo;
 	}
