@@ -25,7 +25,7 @@ import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping(value = "/ContorllerSaceva2")
-public class Avvio {// test
+public class Avvio {// test 23 02 2023
 
 	@Autowired
 	IRepoUtente iu;
