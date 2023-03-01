@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.example.Saceva2.Bo.Account;
@@ -47,7 +48,7 @@ public class Scheduler implements ApplicationListener<ApplicationReadyEvent> {
 	private ArrayList<Dependent> listDip = null;
 	private ArrayList<User> listOfUsers = null;
 	private UpdateDbDipendent updateUsers = new UpdateDbDipendent();
-	private String dateScheduling = "";
+	private String dateScheduling, cryptoPass = "";
 
 	@Scheduled(fixedDelay = 15000)
 	public void upRunning() throws StreamReadException, DatabindException, IOException, SQLException, InterruptedException {
@@ -59,9 +60,15 @@ public class Scheduler implements ApplicationListener<ApplicationReadyEvent> {
 			listOfUsers = updateUsers.listOfUsers(dataFromTabConfig, readFromDb);
 		log.error("devi implemenatre update qui ");
 		
+		BCryptPasswordEncoder cryptoPs = new BCryptPasswordEncoder();
+		
 		if(!listOfUsers.isEmpty() || listOfUsers.size() != 0) {
 			for(User u : listOfUsers) {
 				u.getAccount().getRole().setId(iRole.findByRole(u.getAccount().getRole().getRuolo()).getId());
+				System.out.println("Test encrypt password on update db");
+				cryptoPass = cryptoPs.encode(u.getAccount().getPass());
+				u.getAccount().setPass(cryptoPass);
+				
 				if(iUser.findByTaxCode(u.getTaxCode()) != null) {
 					u.setIdUser(iUser.findByTaxCode(u.getTaxCode()).getIdUser());
 					u.getAccount().setIdAccount(iUser.findByTaxCode(u.getTaxCode()).getAccount().getIdAccount());
