@@ -30,20 +30,20 @@ public class Account {
 	@Column(name = "Password", nullable = false, length = 120)
 	private String pass;
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idRuolo", referencedColumnName = "id")
-	private Permesso ruolo;
+	@JoinColumn(name = "idRole", referencedColumnName = "id")
+	private Role role;
 	@OneToOne(fetch = FetchType.EAGER, mappedBy = "account")
 	@JsonIgnore
-	private User utente;
+	private User users;
 	
 	public Account() {}
 	
-	public Account(String uName, String email, String pass, Permesso ruolo, User utente) {
+	public Account(String uName, String email, String pass, Role role, User user) {
 		this.uName = uName;
 		this.email = email;
 		this.pass = pass;
-		this.ruolo = ruolo;
-		this.utente = utente;
+		this.role = role;
+		this.users = user;
 	}
 
 	public int getIdAccount() {
@@ -78,26 +78,26 @@ public class Account {
 		this.pass = pass;
 	}
 
-	public Permesso getRuolo() {
-		return ruolo;
+	public Role getRole() {
+		return role;
 	}
 
-	public void setRuolo(Permesso ruolo) {
-		this.ruolo = ruolo;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
-	public User getUtente() {
-		return utente;
+	public User getUser() {
+		return users;
 	}
 
-	public void setUtente(User utente) {
-		this.utente = utente;
+	public void setUser(User utente) {
+		this.users = utente;
 	}
 
 	@Override
 	public String toString() {
 		return "Account [idAccount=" + idAccount + ", uName=" + uName + ", email=" + email + ", pass=" + pass
-				+ ", ruolo=" + ruolo + "]";
+				+ ", role=" + role + ", users=" + users + "]";
 	}
 
 }

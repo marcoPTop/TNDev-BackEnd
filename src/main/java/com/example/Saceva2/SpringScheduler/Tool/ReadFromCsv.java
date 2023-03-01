@@ -4,20 +4,20 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.example.Saceva2.SpringScheduler.Dto.Dipendente;
+import com.example.Saceva2.Dto.Dependent;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 
-public class ReadFromCsv {
+public class ReadFromCsv {//work
 
-	public ArrayList<Dipendente> getListDipendneti(File pathFile) throws IOException {
+	public ArrayList<Dependent> getListUser(File pathFile) throws IOException {
 
-		ArrayList<Dipendente> dipList = null;
+		ArrayList<Dependent> userList = null;
 		
-		MappingIterator<Dipendente> personIter = new CsvMapper().readerWithTypedSchemaFor(Dipendente.class).readValues(pathFile);
-		dipList = (ArrayList<Dipendente>) personIter.readAll();
-		for(Dipendente dip:dipList)
+		MappingIterator<Dependent> personIter = new CsvMapper().readerWithTypedSchemaFor(Dependent.class).readValues(pathFile);
+		userList = (ArrayList<Dependent>) personIter.readAll();
+		for(Dependent dip:userList)
 			System.out.println(dip);
-		return dipList;
+		return userList;
 	}
 }

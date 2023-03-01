@@ -35,51 +35,51 @@ public class User {
 	
 	public User() {}
 	
-	public User(String nome, String cognome, String cf, int eta, Account account) {
-		this.name = nome;
-		this.surname = cognome;
-		this.taxCode = cf;
-		this.years = eta;
+	public User(String name, String surname, String taxCode, int years, Account account) {
+		this.name = name;
+		this.surname = surname;
+		this.taxCode = taxCode;
+		this.years = years;
 		this.account = account;
 	}
 
-	public int getIdUtente() {
+	public int getIdUser() {
 		return idUser;
 	}
 
-	public void setIdUtente(int idUtente) {
+	public void setIdUser(int idUtente) {
 		this.idUser = idUtente;
 	}
 
-	public String getNome() {
+	public String getName() {
 		return name;
 	}
 
-	public void setNome(String nome) {
+	public void setName(String nome) {
 		this.name = nome;
 	}
 
-	public String getCognome() {
+	public String getSurname() {
 		return surname;
 	}
 
-	public void setCognome(String cognome) {
+	public void setSurname(String cognome) {
 		this.surname = cognome;
 	}
 
-	public String getCf() {
+	public String getTaxCode() {
 		return taxCode;
 	}
 
-	public void setCf(String cf) {
+	public void setTaxCode(String cf) {
 		this.taxCode = cf;
 	}
 
-	public int getEta() {
+	public int getYears() {
 		return years;
 	}
 
-	public void setEta(int eta) {
+	public void setYears(int eta) {
 		this.years = eta;
 	}
 
@@ -93,7 +93,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "Utente [idUtente=" + idUser + ", nome=" + name + ", cognome=" + surname + ", cf=" + taxCode + ", eta="
-				+ years + ", account=" + account + "]";
+		return "User [idUser=" + idUser + ", name=" + name + ", surname=" + surname + ", taxCode=" + taxCode
+				+ ", years=" + years + ", account=" + account + "]";
 	}
+
 }

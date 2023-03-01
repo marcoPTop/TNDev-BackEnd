@@ -1,10 +1,10 @@
-package com.example.Saceva2.SpringScheduler.Db;
+package com.example.Saceva2.Db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import com.example.Saceva2.SpringScheduler.Db.ConnectionDb;
+import com.example.Saceva2.Db.ConnectionDb;
 
 public class ConnectionDb {
 	

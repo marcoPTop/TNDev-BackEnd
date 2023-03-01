@@ -12,19 +12,19 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import com.example.Saceva2.SpringScheduler.Dto.Dipendente;
+import com.example.Saceva2.Dto.Dependent;
 
 public class ReadFromXml
-{
-	public ArrayList<Dipendente> getListDipendenti(File pathFile)
+{//work
+	public ArrayList<Dependent> getListDipendenti(File pathFile)
 	{
 		System.out.println("method read xml");
 //		System.out.println("Reading file: " + filePath);
-		Dipendente dipObj = null;
+		Dependent dipObj = null;
 //		Class<? extends Dipendente> bo = dipObj.getClass();
 		String rootTag = "DIPENDENTE";
 		
-		ArrayList<Dipendente> arrayEmployees = new ArrayList<Dipendente>();
+		ArrayList<Dependent> arrayEmployees = new ArrayList<Dependent>();
 
 		JAXBContext jc = null;
 		Scanner myReader = null;
@@ -34,7 +34,7 @@ public class ReadFromXml
 		try
 		{
 //			dipObj = new Dipendente();
-			jc = JAXBContext.newInstance(Dipendente.class);
+			jc = JAXBContext.newInstance(Dependent.class);
 			unmarshaller = jc.createUnmarshaller();
 //			File xml = new File(filePath);
 			myReader = new Scanner(pathFile);
@@ -67,7 +67,7 @@ public class ReadFromXml
 				{
 					InputStream is = new ByteArrayInputStream(dipendenteString.getBytes(StandardCharsets.UTF_8));
 
-					dipObj = (Dipendente) unmarshaller.unmarshal(is);
+					dipObj = (Dependent) unmarshaller.unmarshal(is);
 					
 					arrayEmployees.add(dipObj);//cf unique remeber it Strunzù
 

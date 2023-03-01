@@ -1,4 +1,4 @@
-package com.example.Saceva2.SpringScheduler.Dto;
+package com.example.Saceva2.Dto;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -9,13 +9,13 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @XmlRootElement(name = "DIPENDENTE")
 @XmlAccessorType(XmlAccessType.NONE)
-@JsonPropertyOrder({ "email", "userName", "pass", "name", "surname", "cf", "eta", "ruolo" })
-public class Dipendente {
+@JsonPropertyOrder({ "email", "userName", "pass", "name", "surname", "taxCode", "years", "role" })
+public class Dependent {
 	
 	@XmlElement(name = "EMAIL")
 	private String email;
 	@XmlElement(name = "USER_NAME")
-	private String userName;
+	private String uName;
 	@XmlElement(name = "PASSWORD")
 	private String pass;
 	@XmlElement(name = "NAME")
@@ -27,7 +27,7 @@ public class Dipendente {
 	@XmlElement(name = "YEARS")
 	private int years;
 	@XmlElement(name = "RULE")
-	private String ruolo;
+	private String role;
 	
 	public String getEmail() {
 		return email;
@@ -36,10 +36,10 @@ public class Dipendente {
 		this.email = email;
 	}
 	public String getUserName() {
-		return userName;
+		return uName;
 	}
 	public void setUserName(String userName) {
-		this.userName = userName;
+		this.uName = userName;
 	}
 	public String getPass() {
 		return pass;
@@ -72,16 +72,16 @@ public class Dipendente {
 		this.years = eta;
 	}
 	public String getRuolo() {
-		return ruolo;
+		return role;
 	}
 	public void setRuolo(String ruolo) {
-		this.ruolo = ruolo;
+		this.role = ruolo;
 	}
 	
 	@Override
 	public String toString() {
-		return "Dipendente [email=" + email + ", userName=" + userName + ", pass=" + pass + ", name=" + name
-				+ ", surname=" + surname + ", cf=" + taxCode + ", eta=" + years + ", ruolo=" + ruolo + "]";
+		return "Dependent [email=" + email + ", uName=" + uName + ", pass=" + pass + ", name=" + name + ", surname="
+				+ surname + ", taxCode=" + taxCode + ", years=" + years + ", role=" + role + "]";
 	}
-	
+
 }

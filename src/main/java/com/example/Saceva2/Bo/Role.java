@@ -15,8 +15,8 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Ruoli")
-public class Permesso {
+@Table(name = "Role")
+public class Role {
 
 	@Id
 	@SequenceGenerator(name = "SEQ_IDRuolo", sequenceName = "SEQ_IDRuolo", allocationSize = 1, initialValue = 1)
@@ -24,15 +24,15 @@ public class Permesso {
 	@Column(name = "Id")
 	private int id;
 	@Column(length = 30, nullable = false, unique = true)
-	private String ruolo;
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "ruolo")
+	private String role;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "role")
 	@JsonIgnore
 	private List<Account> listAccount;
 	
-	public Permesso() {}
+	public Role() {}
 	
-	public Permesso(String ruolo) {
-		this.ruolo = ruolo;
+	public Role(String ruolo) {
+		this.role = ruolo;
 	}
 
 	public int getId() {
@@ -44,11 +44,11 @@ public class Permesso {
 	}
 
 	public String getRuolo() {
-		return ruolo;
+		return role;
 	}
 
 	public void setRuolo(String ruolo) {
-		this.ruolo = ruolo;
+		this.role = ruolo;
 	}
 
 	public List<Account> getListAccount() {
@@ -61,7 +61,7 @@ public class Permesso {
 
 	@Override
 	public String toString() {
-		return "Permesso [id=" + id + ", ruolo=" + ruolo + ", listAccount=" + listAccount + "]";
+		return "Role [id=" + id + ", role=" + role + ", listAccount=" + listAccount + "]";
 	}
 
 }

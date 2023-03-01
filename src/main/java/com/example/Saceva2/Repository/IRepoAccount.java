@@ -8,4 +8,10 @@ import com.example.Saceva2.Bo.Account;
 //@EnableJdbcRepositories//queste due annotazioni sembra che servano per non far andar in conflitto quando lancio in jar stand alone
 public interface IRepoAccount extends JpaRepository<Account, Integer> {
 	
+	public Account findById(int idAccount);
+	
+	public Account findByEmail(String email);
+	
+//	public Account findByUserName(String uName);
+	
 }
