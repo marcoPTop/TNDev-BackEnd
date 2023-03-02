@@ -36,7 +36,7 @@ with mysql , but I think mysql app can also be fine as long as it is on port 330
 ***Example file type :***
 
 **Xml**
-`<?xml version="1.0" encoding="UTF-8"?>
+```<?xml version="1.0" encoding="UTF-8"?>
 <DIPENDENTI>
     <DIPENDENTE>
         <EMAIL>CIAO@CIOA.CIAO</EMAIL>
@@ -48,13 +48,13 @@ with mysql , but I think mysql app can also be fine as long as it is on port 330
         <YEARS>33</YEARS>
         <RULE>admin</RULE>
     </DIPENDENTE>
-</DIPENDENTI>`
+</DIPENDENTI>```
 
-**Csv**
+**Csv**<br>
 email,userName,password,name,surname,taxCode,years,role
 
 **Json**
-`[
+```[
     {
         "email": "ciao@ciao.org",
         "userName": "MarioRed99",
@@ -65,7 +65,7 @@ email,userName,password,name,surname,taxCode,years,role
         "taxCode": "dsbdsjndj",
         "role": "ceooo2"
     }
-]`
+]```
 
 ***Links :***
 
