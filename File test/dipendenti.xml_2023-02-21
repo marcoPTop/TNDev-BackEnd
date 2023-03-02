@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DIPENDENTI>
+    <DIPENDENTE>
+        <EMAIL>CIAO@CIOA.CIAO</EMAIL>
+        <USER_NAME>CIAO</USER_NAME>
+        <PASSWORD>OAIC</PASSWORD>
+        <NAME>testName</NAME>
+        <SURNAME>test</SURNAME>
+        <TAX_CODE>SDSNNSJFNSNJ</TAX_CODE>
+        <YEARS>33</YEARS>
+        <RULE>CEO</RULE>
+    </DIPENDENTE>
+</DIPENDENTI>

@@ -35,43 +35,12 @@ with mysql , but I think mysql app can also be fine as long as it is on port 330
 
 ***Example file type :***
 
-```
-var add2 = function(number) {
-  return number + 2;
-}
-```
-
 **Xml**
-```<?xml version="1.0" encoding="UTF-8"?>
-<DIPENDENTI>
-    <DIPENDENTE>
-        <EMAIL>CIAO@CIOA.CIAO</EMAIL>
-        <USER_NAME>MarioRed99</USER_NAME>
-        <PASSWORD>12345</PASSWORD>
-        <NAME>Mario</NAME>
-        <SURNAME>rossi</SURNAME>
-        <TAX_CODE>SDSNNSJFNSNJ</TAX_CODE>
-        <YEARS>33</YEARS>
-        <RULE>admin</RULE>
-    </DIPENDENTE>
-</DIPENDENTI>```
 
 **Csv**<br>
-email,userName,password,name,surname,taxCode,years,role
 
 **Json**
-```[
-    {
-        "email": "ciao@ciao.org",
-        "userName": "MarioRed99",
-        "pass": "44432",
-        "name": "Mario",
-        "surname": "rossi",
-        "years": 56,
-        "taxCode": "dsbdsjndj",
-        "role": "ceooo2"
-    }
-]```
+
 
 ***Links :***
 
