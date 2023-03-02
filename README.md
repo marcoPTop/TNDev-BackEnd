@@ -35,6 +35,12 @@ with mysql , but I think mysql app can also be fine as long as it is on port 330
 
 ***Example file type :***
 
+```
+var add2 = function(number) {
+  return number + 2;
+}
+```
+
 **Xml**
 ```<?xml version="1.0" encoding="UTF-8"?>
 <DIPENDENTI>
