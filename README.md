@@ -36,37 +36,36 @@ with mysql , but I think mysql app can also be fine as long as it is on port 330
 ***Example file type :***
 
 **Xml**
-<?xml version="1.0" encoding="UTF-8"?><br>
-<DIPENDENTI><br>
-    <DIPENDENTE><br>
-        <EMAIL>CIAO@CIOA.CIAO</EMAIL><br>
-        <USER_NAME>MarioRed99</USER_NAME><br>
-        <PASSWORD>12345</PASSWORD><br>
-        <NAME>Mario</NAME><br>
-        <SURNAME>rossi</SURNAME><br>
-        <TAX_CODE>SDSNNSJFNSNJ</TAX_CODE><br>
-        <YEARS>33</YEARS><br>
-        <RULE>admin</RULE><br>
-    </DIPENDENTE><br>
-</DIPENDENTI><br>
+`<?xml version="1.0" encoding="UTF-8"?>
+<DIPENDENTI>
+    <DIPENDENTE>
+        <EMAIL>CIAO@CIOA.CIAO</EMAIL>
+        <USER_NAME>MarioRed99</USER_NAME>
+        <PASSWORD>12345</PASSWORD>
+        <NAME>Mario</NAME>
+        <SURNAME>rossi</SURNAME>
+        <TAX_CODE>SDSNNSJFNSNJ</TAX_CODE>
+        <YEARS>33</YEARS>
+        <RULE>admin</RULE>
+    </DIPENDENTE>
+</DIPENDENTI>`
 
 **Csv**
 email,userName,password,name,surname,taxCode,years,role
 
 **Json**
-
-[<br>
-    {<br>
-        "email": "ciao@ciao.org",<br>
-        "userName": "MarioRed99",<br>
-        "pass": "44432",<br>
-        "name": "Mario",<br>
-        "surname": "rossi",<br>
-        "years": 56,<br>
-        "taxCode": "dsbdsjndj",<br>
-        "role": "ceooo2"<br>
-    }<br>
-]<br>
+`[
+    {
+        "email": "ciao@ciao.org",
+        "userName": "MarioRed99",
+        "pass": "44432",
+        "name": "Mario",
+        "surname": "rossi",
+        "years": 56,
+        "taxCode": "dsbdsjndj",
+        "role": "ceooo2"
+    }
+]`
 
 ***Links :***
 
