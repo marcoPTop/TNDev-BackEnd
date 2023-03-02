@@ -36,11 +36,13 @@ with mysql , but I think mysql app can also be fine as long as it is on port 330
 ***Example file type :***
 
 **Xml**
+https://github.com/marcoPTop/TNDev-BackEnd/blob/25bacb00c5f05443073f2123f0ac533c22bcd250/File%20test/dipendenti.xml_2023-02-21
 
 **Csv**<br>
+https://github.com/marcoPTop/TNDev-BackEnd/blob/25bacb00c5f05443073f2123f0ac533c22bcd250/File%20test/dipendenti_2023-03-01.csv
 
 **Json**
-
+https://github.com/marcoPTop/TNDev-BackEnd/blob/25bacb00c5f05443073f2123f0ac533c22bcd250/File%20test/dipendenti.json_2023-03-01
 
 ***Links :***
 
