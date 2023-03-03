@@ -33,7 +33,7 @@ import com.fasterxml.jackson.databind.DatabindException;
 public class Scheduler implements ApplicationListener<ApplicationReadyEvent> {
 
 	private final Logger log = LoggerFactory.getLogger(Scheduler.class);
-	
+
 	@Autowired
 	IRepoUser iUser;
 	@Autowired
@@ -51,25 +51,27 @@ public class Scheduler implements ApplicationListener<ApplicationReadyEvent> {
 	private String dateScheduling, cryptoPass = "";
 
 	@Scheduled(fixedDelay = 15000)
-	public void upRunning() throws StreamReadException, DatabindException, IOException, SQLException, InterruptedException {
+	public void upRunning()
+			throws StreamReadException, DatabindException, IOException, SQLException, InterruptedException {
 		log.info("lunch action evrey 15sec. {}", dateFormat.format(new Date()));
 		listOfUsers = new ArrayList<User>();
 		dataFromTabConfig = readFromDb.readFromConfig(ConnectionDb.getInstance().getConnection(), log);
 		dateScheduling = tool.extractDataFromHashMap(dataFromTabConfig, "DATE_SCHEDULING");
-		if(!dateScheduling.isEmpty())
+		
+		if (!dateScheduling.isEmpty())
 			listOfUsers = updateUsers.listOfUsers(dataFromTabConfig, readFromDb);
 		log.error("devi implemenatre update qui ");
-		
+
 		BCryptPasswordEncoder cryptoPs = new BCryptPasswordEncoder();
-		
-		if(!listOfUsers.isEmpty() || listOfUsers.size() != 0) {
-			for(User u : listOfUsers) {
+
+		if (!listOfUsers.isEmpty() || listOfUsers.size() != 0) {
+			for (User u : listOfUsers) {
 				u.getAccount().getRole().setId(iRole.findByRole(u.getAccount().getRole().getRuolo()).getId());
 				System.out.println("Test encrypt password on update db");
 				cryptoPass = cryptoPs.encode(u.getAccount().getPass());
 				u.getAccount().setPass(cryptoPass);
-				
-				if(iUser.findByTaxCode(u.getTaxCode()) != null) {
+
+				if (iUser.findByTaxCode(u.getTaxCode()) != null) {
 					u.setIdUser(iUser.findByTaxCode(u.getTaxCode()).getIdUser());
 					u.getAccount().setIdAccount(iUser.findByTaxCode(u.getTaxCode()).getAccount().getIdAccount());
 					log.info("Try update on user : " + u.getTaxCode());
@@ -80,9 +82,9 @@ public class Scheduler implements ApplicationListener<ApplicationReadyEvent> {
 //				u.getAccount().setRole(iRole.findByRole(u.getAccount().getRole().getRuolo()));
 				System.out.println("User : " + u.toString());
 				iUser.save(u);
-				Thread.sleep(500);
+				Thread.sleep(275);
 			}
-		}else {
+		} else {
 			System.err.println("list for updae is null");
 		}
 	}

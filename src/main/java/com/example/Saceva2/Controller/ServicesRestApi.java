@@ -116,7 +116,7 @@ public class ServicesRestApi {// test
 		String passCrypt = "";
 
 		Role r = iRole.findById(idRole);// work
-		if (a != null) {
+//		if (a != null) {
 			BCryptPasswordEncoder cryptoPs = new BCryptPasswordEncoder();
 			passCrypt = cryptoPs.encode(a.getPass());
 			a.setPass(passCrypt);
@@ -133,17 +133,11 @@ public class ServicesRestApi {// test
 //			}
 //		}
 
-			a.setRole(r);
-			u.setAccount(a);
-		} else {
-			u.getAccount().setRole(r);
-			BCryptPasswordEncoder cryptoPs = new BCryptPasswordEncoder();
-			passCrypt = cryptoPs.encode(u.getAccount().getPass());
-			u.getAccount().setPass(passCrypt);
-		}
-		System.out.println(" user : " + u + idRole);
+		a.setRole(r);
+		u.setAccount(a);
+		System.out.println(" user : " + u.getName() + " role :  " + idRole);
 		iUser.save(u);
-
+//		return true;
 		return iUser.findAll();
 
 	}

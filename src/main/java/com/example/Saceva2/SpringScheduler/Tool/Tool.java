@@ -1,6 +1,7 @@
 package com.example.Saceva2.SpringScheduler.Tool;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -50,41 +51,53 @@ public class Tool {
 		System.out.println("Dir is  : " + pathDirFile);
 		ArrayList<String> listFileInDir = listFileInDir(pathDirFile);
 		ArrayList<Dependent> dipendentiList = new ArrayList<Dependent>();
+		File dbFile = null;
+	
 
-		if (listFileInDir != null || listFileInDir.size() != 0) {
-			for (String pathfile : listFileInDir) {
-				System.out.println("File is  : " + pathfile);
-				if ((pathfile.contains(toDay()) && new File(pathfile).isFile()) || !new File(pathfile).isDirectory()) {
+		try {
+			if (listFileInDir != null || listFileInDir.size() != 0) {
+				for (String pathfile : listFileInDir) {
+					System.out.println("File is  : " + pathfile);
+					if ((pathfile.contains(toDay()) && new File(pathfile).isFile()) || !new File(pathfile).isDirectory()) {
 
-					// Pattern pattern = Pattern.compile(pathFile, Pattern.CASE_INSENSITIVE);
-					// Matcher matcher = pattern.matcher(".csv");
-					// boolean matchFound = matcher.find();
-					File dbFile = new File(pathfile);
+						// Pattern pattern = Pattern.compile(pathFile, Pattern.CASE_INSENSITIVE);
+						// Matcher matcher = pattern.matcher(".csv");
+						// boolean matchFound = matcher.find();
+						dbFile = new File(pathfile);
 
-					if (pathfile.contains(".csv")) {
-						System.out.println(type + ".csv");
-						rfc = new ReadFromCsv();
-						dipendentiList = rfc.getListUser(dbFile);
-					} else if (pathfile.contains(".json")) {
-						System.out.println(type + ".json");
-						rfj = new ReadFromJson();
-						dipendentiList = rfj.getListDipendenti(dbFile);
-					} else if (pathfile.contains(".xml")) {
-						System.out.println(type + ".xml");
-						rfx = new ReadFromXml();
-						dipendentiList = rfx.getListDipendenti(dbFile);
+						if (pathfile.contains(".csv")) {
+							System.out.println(type + ".csv");
+							rfc = new ReadFromCsv();
+							dipendentiList = rfc.getListUser(dbFile);
+						} else if (pathfile.contains(".json")) {
+							System.out.println(type + ".json");
+							rfj = new ReadFromJson();
+							dipendentiList = rfj.getListDipendenti(dbFile);
+						} else if (pathfile.contains(".xml")) {
+							System.out.println(type + ".xml");
+							rfx = new ReadFromXml();
+							dipendentiList = rfx.getListDipendenti(dbFile);
+						} else {
+							System.err.println(
+									"il file passato non è parsabbile , possiamo parsare solo file di tipo csv, json e xml");
+							return null;
+						}
 					} else {
-						System.err.println(
-								"il file passato non è parsabbile , possiamo parsare solo file di tipo csv, json e xml");
-						return null;
+						System.err.println("il file non è di oggi, oppure è una directory");
 					}
-				} else {
-					System.err.println("il file non è di oggi, oppure è una directory");
 				}
+			} else {
+				System.err.println("Sorry the listFileInDir is null or have 0 element");
 			}
-		} else {
-			System.err.println("Sorry the listFileInDir is null or have 0 element");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
+		
 		return dipendentiList;
 
 	}
@@ -148,7 +161,7 @@ public class Tool {
 
 		User u = null;
 		Role r = new Role(dip.getRuolo());
-		Account a = new Account(dip.getUserName(), dip.getEmail(), dip.getPass(), r, u);
+		Account a = new Account(dip.getUserName(), dip.getEmail(), dip.getPass(), r);
 		u = new User(dip.getName(), dip.getSurname(), dip.getCf(), dip.getEta(), a);
 		System.out.println("dipendenteToBoEntity : " + u.toString());
 		return u;

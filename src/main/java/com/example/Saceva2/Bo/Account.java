@@ -1,7 +1,5 @@
 package com.example.Saceva2.Bo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -10,7 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
@@ -32,18 +29,17 @@ public class Account {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idRole", referencedColumnName = "id")
 	private Role role;
-	@OneToOne(fetch = FetchType.EAGER, mappedBy = "account")
-	@JsonIgnore
-	private User users;
+//	@OneToOne(fetch = FetchType.LAZY, mappedBy = "account")
+//	@JsonIgnore
+//	private User users; not work error tomcat  Cannot call sendError() after the response has been committed
 	
 	public Account() {}
 	
-	public Account(String uName, String email, String pass, Role role, User user) {
+	public Account(String uName, String email, String pass, Role role) {
 		this.uName = uName;
 		this.email = email;
 		this.pass = pass;
 		this.role = role;
-		this.users = user;
 	}
 
 	public int getIdAccount() {
@@ -86,18 +82,18 @@ public class Account {
 		this.role = role;
 	}
 
-	public User getUser() {
-		return users;
-	}
-
-	public void setUser(User utente) {
-		this.users = utente;
-	}
+//	public User getUser() {
+//		return users;
+//	}
+//
+//	public void setUser(User utente) {
+//		this.users = utente;
+//	}
 
 	@Override
 	public String toString() {
 		return "Account [idAccount=" + idAccount + ", uName=" + uName + ", email=" + email + ", pass=" + pass
-				+ ", role=" + role + ", users=" + users + "]";
+				+ ", role=" + role + "]";
 	}
 
 }

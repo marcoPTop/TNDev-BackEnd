@@ -19,8 +19,8 @@ import jakarta.persistence.Table;
 public class Role {
 
 	@Id
-	@SequenceGenerator(name = "SEQ_IDRuolo", sequenceName = "SEQ_IDRuolo", allocationSize = 1, initialValue = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_IDRuolo")
+	@SequenceGenerator(name = "SEQ_IDRole", sequenceName = "SEQ_IDRole", allocationSize = 1, initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_IDRole")
 	@Column(name = "Id")
 	private int id;
 	@Column(length = 30, nullable = false, unique = true)

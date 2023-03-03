@@ -1,5 +1,7 @@
 package com.example.Saceva2.Bo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,8 +19,8 @@ import jakarta.persistence.Table;
 public class User {
 
 	@Id
-	@SequenceGenerator(name = "SEQ_IDUtente", sequenceName = "SEQ_IDUtente", initialValue = 1, allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_IDUtente")
+	@SequenceGenerator(name = "SEQ_IDUser", sequenceName = "SEQ_IDUser", initialValue = 1, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_IDUser")
 	@Column(name = "Id", unique = true, updatable = false)
 	private int idUser;
 	@Column(length = 30, nullable = false)
