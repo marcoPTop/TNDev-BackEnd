@@ -12,7 +12,7 @@ accounts / users / roles, with the account link <-> user so that if a user is de
 ***Update 01-03-23 update database of User automatic when start application and a scheduling time on Db***<br>
 <br>
 Added the update of the DB through three file types (XML, CSV and JSON) with the shape format <br>
-as shown in the image below; This update takes place at the start of the application and at a <br>
+as shown below; This update takes place at the start of the application and at a <br>
 specific time saved in DB 
 <br>
 
