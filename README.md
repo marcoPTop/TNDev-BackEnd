@@ -36,12 +36,15 @@ specification saved in the DB
 ***Example of file type :***
 
 **xml**
+
 https://github.com/marcoPTop/TNDev-BackEnd/blob/25bacb00c5f05443073f2123f0ac533c22bcd250/File%20test/employees.xml_2023-02-21#L1-L13
 
-**Csv**<br>
+**Csv**
+
 https://github.com/marcoPTop/TNDev-BackEnd/blob/25bacb00c5f05443073f2123f0ac533c22bcd250/File%20test/employees_2023-03-01.csv#L1-L2
 
 **json**
+
 https://github.com/marcoPTop/TNDev-BackEnd/blob/25bacb00c5f05443073f2123f0ac533c22bcd250/File%20test/employees.json_2023-03-01#L1-L12
 
 
