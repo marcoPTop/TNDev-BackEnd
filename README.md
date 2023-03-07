@@ -7,7 +7,7 @@ accounts / users / roles, with the account <-> user link so that if a user is de
 
 **~~?Is the login phase under development?~~**
 
-***~~Update 02-16-23 Login & Password Encryption ~~*** :smile:
+***~~Update 02-16-23 Login & Password Encryption~~*** :smile:
 
 ***Update 01-03-23 updates the user database automatically on application startup and at a scheduled time on Db***<br>
 <br>
