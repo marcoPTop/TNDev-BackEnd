@@ -88,7 +88,7 @@ public class Scheduler implements ApplicationListener<ApplicationReadyEvent> {
 					Thread.sleep(275);
 				}
 			} else {
-				System.err.println("list for updae is null");
+				System.err.println("list for update is null");
 			}
 			
 			dateSchedulingTemp = dateScheduling;
