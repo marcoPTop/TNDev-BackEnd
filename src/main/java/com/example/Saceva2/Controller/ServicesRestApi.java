@@ -26,7 +26,7 @@ import com.example.Saceva2.Repository.IRepoRole;
 import com.example.Saceva2.Repository.IRepoTabConfig;
 import com.example.Saceva2.Repository.IRepoUser;
 import com.example.Saceva2.SpringScheduler.Tool.Tool;
-import com.example.Saceva2.SpringScheduler.Tool.UpdateDbDipendent;
+import com.example.Saceva2.SpringScheduler.Tool.ListDipendentToUser;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -54,7 +54,7 @@ public class ServicesRestApi {// test
 
 	private String dateScheduling = "";
 
-	UpdateDbDipendent updateDipendnet = new UpdateDbDipendent();
+	ListDipendentToUser updateDipendnet = new ListDipendentToUser();
 
 	//////////////////////////// Login\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	@PostMapping(value = "login")

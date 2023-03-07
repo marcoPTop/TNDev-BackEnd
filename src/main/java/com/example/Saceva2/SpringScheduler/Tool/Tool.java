@@ -50,15 +50,16 @@ public class Tool {
 
 		System.out.println("Dir is  : " + pathDirFile);
 		ArrayList<String> listFileInDir = listFileInDir(pathDirFile);
-		ArrayList<Dependent> dipendentiList = new ArrayList<Dependent>();
+		ArrayList<Dependent> dependentList = new ArrayList<Dependent>();
 		File dbFile = null;
-	
+//		int indexLastPoint = 0;
 
 		try {
-			if (listFileInDir != null || listFileInDir.size() != 0) {
+			if (listFileInDir != null || listFileInDir.size() != 0 || !listFileInDir.isEmpty()) {
 				for (String pathfile : listFileInDir) {
 					System.out.println("File is  : " + pathfile);
-					if ((pathfile.contains(toDay()) && new File(pathfile).isFile()) || !new File(pathfile).isDirectory()) {
+					if ((pathfile.contains(toDay()) && new File(pathfile).isFile())
+							|| !new File(pathfile).isDirectory()) {
 
 						// Pattern pattern = Pattern.compile(pathFile, Pattern.CASE_INSENSITIVE);
 						// Matcher matcher = pattern.matcher(".csv");
@@ -66,39 +67,36 @@ public class Tool {
 						dbFile = new File(pathfile);
 
 						if (pathfile.contains(".csv")) {
-							System.out.println(type + ".csv");
+							System.err.println(type + ".csv");
 							rfc = new ReadFromCsv();
-							dipendentiList = rfc.getListUser(dbFile);
+							dependentList = rfc.getListUser(dbFile);
 						} else if (pathfile.contains(".json")) {
-							System.out.println(type + ".json");
+							System.err.println(type + ".json");
 							rfj = new ReadFromJson();
-							dipendentiList = rfj.getListDipendenti(dbFile);
+							dependentList = rfj.getListDipendenti(dbFile);
 						} else if (pathfile.contains(".xml")) {
-							System.out.println(type + ".xml");
+							System.err.println(type + ".xml");
 							rfx = new ReadFromXml();
-							dipendentiList = rfx.getListDipendenti(dbFile);
+							dependentList = rfx.getListDipendenti(dbFile);
 						} else {
 							System.err.println(
-									"il file passato non è parsabbile , possiamo parsare solo file di tipo csv, json e xml");
-							return null;
+									"the passed file is not parsable, we can only parse csv, json and xml files\nFile passed : "
+											+ pathfile);
 						}
 					} else {
-						System.err.println("il file non è di oggi, oppure è una directory");
+						System.err.println("the file is not today, or it is a directory");
 					}
 				}
 			} else {
 				System.err.println("Sorry the listFileInDir is null or have 0 element");
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		return dipendentiList;
+
+		return dependentList;
 
 	}
 
@@ -123,22 +121,28 @@ public class Tool {
 		String[] fileInDir;
 		File dir = new File(path);
 		File temp = null;
+		int indexLastPoint = 0;
+
 		if (dir.isDirectory()) {
 			fileInDir = dir.list();
 			for (int i = 0; i < fileInDir.length; i++) {
-				System.out.println("file in : " + fileInDir[i]);
-				temp = new File(path+fileInDir[i]);
+
+				System.out.println("file is : " + fileInDir[i]);
+				temp = new File(path + fileInDir[i]);
+				indexLastPoint = fileInDir[i].lastIndexOf('.');
+
 				if (fileInDir[i].contains(toDay()) && !temp.isDirectory()) {
-					if (fileInDir[i].contains(".csv") || fileInDir[i].contains(".json")
-							|| fileInDir[i].contains(".xml")) {
+					if (fileInDir[i].subSequence(indexLastPoint, fileInDir[i].length()).equals(".csv")
+							|| fileInDir[i].subSequence(indexLastPoint, fileInDir[i].length()).equals(".json")
+							|| fileInDir[i].subSequence(indexLastPoint, fileInDir[i].length()).equals(".xml")) {
 						fileInDirFinal.add(path + fileInDir[i]);
 					} else {
-						System.err.println("the file : " + fileInDir[i] + " is not parsable because is skipped");
+						System.err.println("the file : " + fileInDir[i] + " is not parsable, so it was skipped");
 					}
 				} else if (temp.isDirectory()) {
-					System.err.println("the file : " + fileInDir[i] + " is directory");
+					System.err.println("THE FILE : " + fileInDir[i] + " IS DIRECTORY");
 				} else {
-					System.err.println("the file : " + fileInDir[i] + " is obsolete");
+					System.err.println("THE FILE : " + fileInDir[i] + " IS OBSOLETE");
 				}
 			}
 		}
@@ -222,12 +226,5 @@ public class Tool {
 
 		return result;
 	}
-
-//	public static void main(String[] args) {
-//		String ciao = "2023-02-27";
-//		if(ciao.contains(toDay())) {
-//			System.out.println("true");
-//		}
-//	}
 
 }

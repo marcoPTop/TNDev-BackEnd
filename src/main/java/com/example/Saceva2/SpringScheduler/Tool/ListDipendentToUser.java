@@ -18,9 +18,9 @@ import com.example.Saceva2.Dto.Dependent;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 
-public class UpdateDbDipendent {
-	
-	private final Logger log = LoggerFactory.getLogger(UpdateDbDipendent.class);
+public class ListDipendentToUser {
+
+	private final Logger log = LoggerFactory.getLogger(ListDipendentToUser.class);
 
 	Tool tool = new Tool();
 
@@ -30,7 +30,8 @@ public class UpdateDbDipendent {
 
 	private ArrayList<User> listOfUser = new ArrayList<User>();
 
-	public ArrayList<User> listOfUsers(HashMap<String, String> dataFromTabConfig, ReadFromDb readFromDb) throws StreamReadException, DatabindException, IOException {
+	public ArrayList<User> listOfUsers(HashMap<String, String> dataFromTabConfig, ReadFromDb readFromDb)
+			throws StreamReadException, DatabindException, IOException {
 
 		System.out.println("run listOfUsers");
 		SimpleDateFormat dateFormatDb = null;
@@ -42,11 +43,11 @@ public class UpdateDbDipendent {
 		String stringDate = "";
 		String dateScheduling = "";
 
-		try {// re-loadTab-config in hashmap
-			dataFromTabConfig = readFromDb.readFromConfig(ConnectionDb.getInstance().getConnection(), log);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+//		try {// re-loadTab-config in hashmap, error reload in previous class every 15 second on lunch scheduling
+//			dataFromTabConfig = readFromDb.readFromConfig(ConnectionDb.getInstance().getConnection(), log);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
 		dateScheduling = tool.extractDataFromHashMap(dataFromTabConfig, "DATE_SCHEDULING");
 
 		if (dateScheduling.contains(":")) {
@@ -67,38 +68,36 @@ public class UpdateDbDipendent {
 		}
 
 		System.err.println("date a confronto db e macchina : " + dateDb + " , " + toDay);
-		if (!stringDateTemp.equals(stringDate) || stringDateTemp.isEmpty()) {//work
+		if (!stringDateTemp.equals(stringDate) || stringDateTemp.equals("")) {// work
 			if (dateDb.before(toDay)) {
 				System.out.println("date checked try to start");
 				System.out.println("variabile stringDateTemp : " + stringDateTemp + "\nStringDate : " + stringDate);
-
-//				System.out.println("Try to update db dependent");
 				System.out.println("start read dir from : " + dataFromTabConfig.get("PATH_FILE"));
+
 				listOfDependent = tool.readFile(dataFromTabConfig.get("PATH_FILE"));
 
-				for (Dependent dep : listOfDependent) {
-					User u = tool.dependentToBoEntity(dep);
-					if(listOfUser != null)
-						listOfUser.add(u);
+				if (listOfDependent != null || listOfDependent.size() != 0) {
+
+					for (Dependent dep : listOfDependent) {
+
+						User u = tool.dependentToBoEntity(dep);
+
+						if (listOfUser != null)
+							listOfUser.add(u);
+					}
+					stringDateTemp = stringDate;
+
+					System.out.println("fine convert obj dependent");
+
+				} else {
+					System.err.println("your list is empity");
 				}
-//				insertDb(listOfUser);
-				stringDateTemp = stringDate;
-				System.out.println("fine convert obj dependent");
-			} 
-		}else {
+			}
+		} else {
 			System.err.println("You updated Db at hours : " + stringDateTemp);
 			return new ArrayList<User>();
 		}
 		return listOfUser;
 	}
-	
-//	public void insertDb(ArrayList<User> users) {
-//		for(User user:users) {
-////			user.setIdUtente(null);
-//			System.out.println("try insert user : " + user.getNome());
-//			iUser.save(user);
-//		}
-//			
-//	}
 
 }

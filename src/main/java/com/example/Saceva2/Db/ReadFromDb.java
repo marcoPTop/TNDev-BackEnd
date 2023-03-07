@@ -31,11 +31,17 @@ public class ReadFromDb {
 		}
 		finally {
 			
-			if (rs != null)
+			if (rs != null) {
 				rs.close();
+			}
 			
-			if (selectStatement != null)
+			if (selectStatement != null) {
 				selectStatement.close();
+			}
+			
+			if(connection != null) {
+				connection.close();
+			}
 		}
 		log.debug("Data extratc from tab_config :\n" + conf);
 		log.info("end read from tab config");
