@@ -57,4 +57,10 @@ download [Xampp](https://www.apachefriends.org/it/index.html "Download Xampp")
 ***Note :***
 The application has been set to try to update the database automatically by reading a <br>
 path passed to it from the db every 15 seconds, this is in the development phase to see any errors,<br>
-but it goes without saying that it is not a suitable choice in a "real" case.
+but it goes without saying that it is not a suitable choice in a "real" case ;<br>
+however you can change this parameter in the Scheduler class on line 52 and change the value<br>
+of fixedDelay to your preferred time, but this variable only accepts milliseconds.
+
+***Scheduler :***
+
+https://github.com/marcoPTop/TNDev-BackEnd/blob/bdb3bcaa858f40a3221cf2900dc3b59654a0671b/src/main/java/com/example/Saceva2/Controller/Scheduler.java#L51-L55
